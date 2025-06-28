@@ -1,0 +1,260 @@
+/* === Container and Titles === */
+/* :root{
+    background-color: #1f232e;
+} */
+
+.Container1 {
+    display: flex;
+    flex-direction: column;
+    background-color: #1f232e;
+    padding: 10px;
+}
+
+/* === Titles === */
+.title,
+.title1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #f5f8fa;
+    margin-bottom: 2rem;
+}
+
+.title2 {
+    text-align: center;
+    font-size: 1rem;
+    color: #000000;
+    margin-bottom: 2rem;
+}
+
+.title1 {
+    color: #ffffff;
+}
+
+.title2 {
+    margin-top: 40px;
+    margin-bottom: 1rem;
+    
+}
+.title4 {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.scene-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+
+/* === Network Section === */
+.network-section {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* === Network Boxes === */
+.before-network,
+.after-network {
+    flex: 1;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    height: auto;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.Impact-container{
+    display: flex;
+    flex-direction: column;
+    background-color: #c21968;
+    border-radius: 8px;
+    gap: 20px;
+    width: 36.3%;
+    height: auto;
+    border: #c21968 solid 1px;
+    margin-bottom: 10px;
+}
+
+/* === Canvas Container (for network visualizations) === */
+/* 
+/* === Canvas Styling (prevents overlap with title) === */
+.before-network canvas,
+.after-network canvas {
+    display: block;
+    width: 100% !important;
+    height: 60vh !important;
+    /* max-height: calc(100% - 40px); */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    top: 0;
+}
+/* .scene-container  canvas{
+    width: 100%;
+    height: 10%;
+    position: relative;
+    overflow: hidden;
+} */
+
+/* === Control Panel === */
+.Control-pannel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50%;
+    border-radius: 10px;
+    background-color: #1f232e !important;
+    position: relative;
+}
+
+/* === Category Button (Drug Selector) === */
+.category-button {
+    background-color: #1f2937;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: 3px solid #c21968;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 5px;
+    width: auto;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.category-button.selected {
+    background-color: #c21968;
+    border-color: #1f2937;
+    color: #ffffff;
+}
+
+/* === Doping Button Positioned Bottom Right === */
+.dop-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1f2937;
+    color: #ffffff;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin: 0;
+    width: auto;
+    z-index: 10;
+}
+
+/* === Metrics Table Section === */
+.metrics-section {
+    overflow-x: auto;
+    background-color: #1f232e;
+}
+
+
+
+.impact-table {
+  width: 90%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    margin-left: 15px;
+    margin-bottom:10px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    table-layout: fixed;
+}
+.impact-table th,
+.impact-table td {
+    border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+
+.impact-table thead th {
+    background-color: #0f1214;
+    color: #fff;
+}
+.impact-table th:nth-child(1),
+.impact-table td:nth-child(1) {
+    width: 78%;
+}
+
+
+.information-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    table-layout: fixed;
+}
+
+.information-table th,
+.information-table td {
+    border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.information-table thead th {
+    background-color: #0f1214;
+    color: #fff;
+}
+
+/* === Table Column Widths (2:1:1:4 ratio) === */
+.information-table th:nth-child(1),
+.information-table td:nth-child(1) {
+    width: 16%;
+}
+
+.information-table th:nth-child(2),
+.information-table td:nth-child(2) {
+    width: 25%;
+}
+
+.information-table th:nth-child(3),
+.information-table td:nth-child(3) {
+    width: 25%;
+}
+
+.information-table th:nth-child(4),
+.information-table td:nth-child(4) {
+    width: 60%;
+}
+.information-table th:nth-child(5),
+.information-table td:nth-child(5) {
+    width: 40%;
+}
+
+.information-table th:nth-child(6),
+.information-table td:nth-child(6) {
+    width: 20%;
+}
+
+
+/* === No Results Message === */
+.no-results {
+    text-align: center;
+    padding: 1rem;
+    color: #999;
+}
+
+.category-dropdown {
+    color: #ffffff;
+    font-size: 20px;
+    background-color: #c21968;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: auto;
+}

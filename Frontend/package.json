@@ -1,0 +1,44 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.2.0",
+    "@react-three/fiber": "^9.1.2",
+    "axios": "^1.9.0",
+    "cytoscape": "^3.31.1",
+    "cytoscape-cola": "^2.5.1",
+    "d3": "^7.9.0",
+    "flow": "^0.2.3",
+    "lucide-react": "^0.516.0",
+    "molecule-3d-for-react": "^0.2.2",
+    "react": "^19.0.0",
+    "react-cytoscapejs": "^2.0.0",
+    "react-dom": "^19.0.0",
+    "react-force-graph-3d": "^1.26.1",
+    "react-router-dom": "^7.3.0",
+    "reactflow": "^11.11.4",
+    "three": "^0.174.0",
+    "vis-data": "^7.1.9",
+    "vis-network": "^9.1.9",
+    "vis-timeline": "^7.7.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react-swc": "^3.8.0",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^15.15.0",
+    "vite": "^6.2.0"
+  }
+}

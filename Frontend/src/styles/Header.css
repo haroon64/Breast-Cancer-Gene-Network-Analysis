@@ -1,0 +1,288 @@
+/* ===============================================
+   IMPROVED HEADER CSS
+   =============================================== */
+
+/* CSS Custom Properties for consistency and easy maintenance */
+:root {
+    --header-height: 60px;
+    --primary-color: #ff1493;
+    --primary-color-light: rgba(255, 20, 147, 0.1);
+    --text-primary: #333;
+    --text-secondary: #666;
+    --text-muted: #555;
+    --link-blue: #0056b3;
+    --background-white: #ffffff;
+    --border-light: #ddd;
+    --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-dropdown: 0 4px 12px rgba(0, 0, 0, 0.15);
+    --border-radius: 6px;
+    --border-radius-small: 4px;
+    --transition-fast: 0.2s ease;
+    --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+}
+
+/* Container adjustment for fixed header */
+.header-container {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    padding-top: var(--header-height);
+    line-height: 1.5;
+}
+
+/* Fixed header bar */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(var(--spacing-lg), 4vw, var(--spacing-xl));
+    background: var(--background-white);
+    box-shadow: var(--shadow-light);
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Logo section */
+.header-left {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.header-left:hover {
+    transform: scale(1.02);
+}
+
+.logo-img {
+    width: 50px;
+    height: auto;
+    border-radius: var(--border-radius-small);
+}
+
+.logo-text {
+    margin-left: var(--spacing-sm);
+    color: var(--primary-color);
+    font-size: clamp(18px, 2.5vw, 20px);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Navigation container */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(var(--spacing-lg), 4vw, 43px);
+    margin-right: clamp(50px, 15vw, 150px);
+}
+
+/* Navigation item wrapper */
+.nav-item {
+    position: relative;
+}
+
+/* Base navigation button style */
+.nav-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--border-radius-small);
+    transition: all var(--transition-smooth);
+    white-space: nowrap;
+    text-decoration: none;
+    outline: none;
+    position: relative;
+}
+
+.nav-button:hover,
+.nav-button:focus-visible {
+    background: var(--primary-color-light);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.nav-button:focus-visible {
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.nav-button:active {
+    transform: translateY(0);
+}
+
+/* Dropdown arrow for items with dropdown */
+.has-dropdown > .nav-button::after {
+    content: '\25BE';
+    font-size: 0.7em;
+    color: var(--text-secondary);
+    transition: transform var(--transition-fast), color var(--transition-fast);
+    margin-left: 2px;
+}
+
+.has-dropdown:hover > .nav-button::after,
+.has-dropdown > .nav-button:focus-visible::after {
+    color: var(--primary-color);
+    transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.dropdown {
+    position: absolute;
+    top: calc(100% + var(--spacing-xs));
+    left: 0;
+    background: var(--background-white);
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-dropdown);
+    display: none;
+    flex-direction: column;
+    padding: var(--spacing-md);
+    min-width: 220px;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all var(--transition-smooth);
+}
+
+/* Show dropdown on hover */
+.nav-item:hover .dropdown {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Dropdown items */
+.dropdown-item {
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-small);
+    transition: background var(--transition-fast);
+}
+
+.dropdown-item:last-child {
+    margin-bottom: 0;
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.dropdown-title {
+    display: block;
+    font-weight: 600;
+    color: var(--link-blue);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color var(--transition-fast);
+    line-height: 1.3;
+}
+
+.dropdown-title:hover {
+    color: var(--primary-color);
+}
+
+.dropdown-description {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: var(--spacing-xs);
+    line-height: 1.4;
+}
+
+/* Simple dropdown links */
+.dropdown-link {
+    display: block;
+    font-size: 14px;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: var(--spacing-xs) 0;
+    transition: color var(--transition-fast);
+    line-height: 1.4;
+}
+
+.dropdown-link:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .nav {
+        gap: var(--spacing-md);
+        margin-right: var(--spacing-lg);
+    }
+    
+    .nav-button {
+        font-size: 13px;
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+    
+    .dropdown {
+        min-width: 200px;
+        right: 0;
+        left: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .nav {
+        gap: var(--spacing-sm);
+        margin-right: 0;
+    }
+    
+    .logo-text {
+        display: none;
+    }
+    
+    .dropdown {
+        min-width: 180px;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus management for keyboard navigation */
+.nav-item:focus-within .dropdown {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .header {
+        border-bottom: 2px solid var(--text-primary);
+    }
+    
+    .nav-button:hover,
+    .nav-button:focus-visible {
+        background: var(--text-primary);
+        color: var(--background-white);
+    }
+}

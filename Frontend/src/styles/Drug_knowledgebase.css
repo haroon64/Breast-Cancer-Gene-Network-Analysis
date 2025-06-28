@@ -1,0 +1,218 @@
+.drug-container {
+  font-family: Arial, sans-serif;
+}
+
+.drug-container h2 {
+  margin-bottom: 10px;
+  color: white;
+  font-size: 35px;
+  padding-left: 12px;
+}
+
+.drug-container p {
+  color: white;
+  padding-left: 12px;
+  font-size: 20px;
+  padding-right: 12px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  background-color: #192027;
+}
+
+.display-count {
+  margin: 20px 0;
+  font-weight: bold;
+  margin-left: 12px;
+}
+
+.drug-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.drug-table thead {
+  background-color: #192027;
+  color: white;
+}
+
+.drug-table th,
+.drug-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+  /* font:bold 16px Arial, sans-serif; */
+  word-wrap: break-word;
+}
+
+/* Assign more width to columns that require it */
+.drug-table th:nth-child(1),
+.drug-table td:nth-child(1) {
+  width: 15%; /* e.g. Drug Name */
+}
+
+.drug-table th:nth-child(2),
+.drug-table td:nth-child(2) {
+  width: 15%; /* e.g. Category */
+}
+
+.drug-table th:nth-child(3),
+.drug-table td:nth-child(3) {
+  width: 30%; /* e.g. Description or other wide column */
+}
+
+.drug-table th:nth-child(4),
+.drug-table td:nth-child(4) {
+  width: 30%; /* e.g. Manufacturer or similar */
+}
+
+.drug-table th:nth-child(5),
+.drug-table td:nth-child(5) {
+  width: 30%; /* e.g. Manufacturer or similar */
+}
+.drug-table th:nth-child(6),
+.drug-table td:nth-child(6) {
+  width: 30%; /* e.g. Manufacturer or similar */
+}
+/* Add more nth-child selectors as needed for your table structure */
+
+.drug-table th {
+  vertical-align: middle;
+}
+
+.drug-table input {
+  width: 100%;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.clear-button {
+  padding: 6px 10px;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.clear-button:hover {
+  background-color: #ccc;
+}
+
+.details-button {
+  padding: 6px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.details-button:hover {
+  background-color: #0056b3;
+}
+
+.drug-name {
+  color: blue;
+  font-weight: bold;
+}
+
+/* modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  min-width: 300px;
+  max-width: 500px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+}
+
+.modal-content ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.modal-content ul li {
+  margin-bottom: 0.5rem;
+}
+
+.close-button {
+  background-color: #d9534f;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* new */
+
+.modal.large {
+  max-width: 80%;
+  width: 100%;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 90vh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.drug-image {
+  max-width: 300px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.drug-details {
+  flex: 1;
+  min-width: 250px;
+}
+
+.drug-details p,
+.drug-background p {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
+.drug-background {
+  margin-top: 1rem;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #0056b3;
+}

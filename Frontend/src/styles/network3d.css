@@ -1,0 +1,30 @@
+.Network3d-container {
+ 
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #111;
+  padding: 10px;
+  border-radius: 10px;
+  flex-direction: column;
+}
+.title-1{
+    text-align: center;
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 2rem;
+
+
+}
+ .Network3d-box{
+    flex: 1;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    height: 100%;
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  
+ }
