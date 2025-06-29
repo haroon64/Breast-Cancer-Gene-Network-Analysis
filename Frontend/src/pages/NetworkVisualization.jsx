@@ -15,6 +15,7 @@ const NetworkVisualization = () => {
   const [thicknessValue, setThicknessValue] = useState(3);
   const [networkInstance, setNetworkInstance] = useState(null);
   const [edgeContextMenu, setEdgeContextMenu] = useState({ visible: false, x: 0, y: 0, edgeId: null });
+  const [networkFetched, setNetworkFetched] = useState(false); // Track if network is fetched
 
   // Store node positions to preserve layout
   const positionsRef = useRef({});
@@ -43,8 +44,12 @@ const NetworkVisualization = () => {
         setNodes(new DataSet(nodesWithPositions));
         setEdges(new DataSet(fetchedEdges));
         setMetrics(fetchedMetrics);
+        setNetworkFetched(true); // Mark network as fetched
       })
-      .catch(error => console.error("Error fetching network:", error));
+      .catch(error => {
+        console.error("Error fetching network:", error);
+        setNetworkFetched(false);
+      });
   };
 
   useEffect(() => {
@@ -239,11 +244,11 @@ const NetworkVisualization = () => {
         <div className="control-panel">
           <h3>Controls</h3>
           <button onClick={fetchNetwork}>Fetch Network</button>
-          <button onClick={Compute_results}>Compute Results</button>
+          <button onClick={Compute_results} disabled={!networkFetched}>Compute Results</button>
         </div>
 
         <div className="network-box">
-          <div ref={networkRef} style={{ width: "600px", height: "500px", border: "1px solid black" }}></div>
+          <div ref={networkRef} style={{ width: "600px", height: "419px", border: "1px solid black" }}></div>
         </div>
 
         <div className="results-box">

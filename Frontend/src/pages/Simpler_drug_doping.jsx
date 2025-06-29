@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { DataSet, Network } from "vis-network/standalone";
 import axios from "axios";
 import "vis-network/styles/vis-network.css";
-import "../styles/Network.css";
+import "../styles/Simpler_drug_doping.css";
 
 // Helper to map node ids to alphabets
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -28,7 +28,6 @@ function mapEdgesToAlphabets(edges, idToAlpha) {
         ...edge,
         from: idToAlpha[edge.from],
         to: idToAlpha[edge.to],
-        label: edge.weight !== undefined ? String(edge.weight) : '',
         title: edge.weight !== undefined ? `Weight: ${edge.weight}` : '',
         font: { align: "top", color: "#000", size: 16, strokeWidth: 0, vadjust: -10 }
     }));
@@ -59,30 +58,44 @@ const SimplerDrugDoping = () => {
     const [selectedNode, setSelectedNode] = useState(null);
     const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, nodeId: null });
     const [edgeContextMenu, setEdgeContextMenu] = useState({ visible: false, x: 0, y: 0, edgeId: null });
+    const [mapReducePressed, setMapReducePressed] = useState(false);
+    const [doxorubicinPressed, setDoxorubicinPressed] = useState(false);
 
-
+    // Fetch original network without mapping node ids to alphabets
     const fetch_original_network = () => {
-        axios.get("http://127.0.0.1:8000/network/fetch-network")
-             .then(response => {
-                    const fetchedNodes = response.data.nodes || [];
-                    const fetchedEdges = (response.data.edges || []).map(edge => ({
-                      ...edge,
-                      label: edge.weight !== undefined ? String(edge.weight) : '',
-                      title: edge.weight !== undefined ? `Weight: ${edge.weight}` : '',
-                      font: { align: "top", color: "#000", size: 16, strokeWidth: 0, vadjust: -10 }
-                    }));
-                    const fetchedMetrics = response.data || null;
-            
-                    // Restore positions if available
-                  
-            
-                    setNodes(new DataSet(fetchedNodes));
-                    setEdges(new DataSet(fetchedEdges));
-                 
-                  })
-                  .catch(error => console.error("Error fetching network:", error));
-              };
-    
+        axios.get("http://127.0.0.1:8000/network/fetch-network1")
+            .then(response => {
+                const fetchedNodes = response.data.nodes || [];
+                const fetchedEdges = response.data.edges || [];
+
+                // Arrange nodes in a circle using original ids
+                const circularNodes = arrangeNodesInCircle(
+                    fetchedNodes.map(node => ({
+                        ...node,
+                        label: node.label || node.id // Use label if present, else id
+                    }))
+                );
+
+                // Build dict and idToAlpha using original ids (no mapping)
+                const { mappedNodes, dict, idToAlpha } = mapNodesToAlphabets(fetchedNodes);
+                setDict(dict);
+                setIdToAlpha(idToAlpha);
+                setNodes(new DataSet(circularNodes));
+                setEdges(new DataSet(
+                    fetchedEdges.map(edge => ({
+                        ...edge,
+                        from: edge.from,
+                        to: edge.to,
+                        title: edge.weight !== undefined ? `Weight: ${edge.weight}` : '',
+                        font: { align: "top", color: "#000", size: 16, strokeWidth: 0, vadjust: -10 }
+                    }))
+                ));
+                setMapReducePressed(false); // Reset Map/Reduce state
+                setDoxorubicinPressed(false); // Hide impact box
+            })
+            .catch(error => console.error("Error fetching network:", error));
+    };
+
     const fetchNetwork = () => {
         axios.get("http://127.0.0.1:8000/network/fetch-network1")
             .then(response => {
@@ -97,6 +110,8 @@ const SimplerDrugDoping = () => {
                 setIdToAlpha(idToAlpha);
                 setNodes(new DataSet(circularNodes));
                 setEdges(new DataSet(mapEdgesToAlphabets(fetchedEdges, idToAlpha)));
+                setMapReducePressed(true); // Enable Dop Drug Doxorubicin button
+                setDoxorubicinPressed(false); // Hide impact box
             })
             .catch(error => console.error("Error fetching network:", error));
     };
@@ -122,6 +137,7 @@ const SimplerDrugDoping = () => {
                 const circularNodes = arrangeNodesInCircle(currentNodes);
                 setNodes(new DataSet(circularNodes));
                 setEdges(new DataSet(updatedEdges));
+                setDoxorubicinPressed(true); // Show impact box
             })
             .catch(error => console.error("Error fetching network:", error));
     };
@@ -132,7 +148,7 @@ const SimplerDrugDoping = () => {
         const options = {
             nodes: {
                 shape: "dot",
-                size: 10,
+                size: 20,
                 color: {
                     background: "#ff66b2",
                     border: "#ffffff",
@@ -145,10 +161,8 @@ const SimplerDrugDoping = () => {
                     color: "#ff99cc",
                     highlight: "#ff3385",
                     hover: "#ff3385",
-               
-
                 },
-                width: 2.5,
+                width: 2,
                 smooth: {
                     enabled: true,
                     type: "continuous"
@@ -159,7 +173,7 @@ const SimplerDrugDoping = () => {
                 },
                 font: {
                     align: "top",
-                    color: "#000",
+                    color: "#   ",
                     size: 16,
                     strokeWidth: 0,
                     vadjust: -10
@@ -185,6 +199,7 @@ const SimplerDrugDoping = () => {
                 zoomSpeed: 0.5,
             }
         };
+        // const handledict = (ns) => {
 
         const network = new Network(container, data, options);
 
@@ -220,19 +235,38 @@ const SimplerDrugDoping = () => {
             setEdgeContextMenu({ visible: false });
         }}>
             <header>
-                <h1>Simpler Drug doping</h1>
+                <h1>Simpler Drug Doping</h1>
             </header>
             <div className="network-container">
-                <div className="control-panel">
+                <div className="control-impact-box" >
+                  <div className="control-panel">
                     <h3>Controls</h3>
                     <button onClick={fetch_original_network}>Fetch Network</button>
                     <button onClick={fetchNetwork}>Map and Reduce </button>
-                    <button onClick={handledopDrugDoxorubicin}>Dop Drug Doxorubicin</button>
+                    <button 
+                        onClick={handledopDrugDoxorubicin} 
+                        disabled={!mapReducePressed}
+                        style={{ opacity: mapReducePressed ? 1 : 0.5, cursor: mapReducePressed ? "pointer" : "not-allowed" }}
+                    >
+                        Dop Drug Doxorubicin
+                    </button>
+                  </div>
+
+                  {doxorubicinPressed && (
+                    <div className="impact-box">
+                        <h3>Impact of Doxorubicin Drug</h3>
+                        <div>
+                            <ul>
+                                <li> Removed G Gene</li>
+                                <li> Weakened interaction between B and E</li>
+                            </ul>
+                        </div>
+                    </div>
+                  )}
                 </div>
                 <div className="network-box">
-                    <div ref={networkRef} style={{ width: "600px", height: "500px", border: "1px solid black" }}></div>
+                    <div ref={networkRef} style={{ width: "600px", height: "419px", border: "1px solid black" }}></div>
                 </div>
-
                 <div className="results-box">
                     <h3>Dictionary</h3>
                     {dict && Object.keys(dict).length > 0 ? (
