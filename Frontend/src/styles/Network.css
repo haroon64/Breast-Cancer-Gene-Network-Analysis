@@ -110,7 +110,7 @@ header h1::after {
 .results-box h3 {
     margin: 0 0 var(--spacing-md) 0;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 800;
     color: var(--primary-color);
     border-bottom: 2px solid var(--primary-light);
     padding-bottom: var(--spacing-xs);
@@ -233,6 +233,7 @@ select:hover {
 .results-box li {
     padding: var(--spacing-xs) 0;
     border-bottom: 1px solid var(--border-light);
+    font: bold 14px var(--font-family);
     display: flex;
     justify-content: space-between;
     align-items: center;

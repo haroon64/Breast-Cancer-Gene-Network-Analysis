@@ -2,8 +2,35 @@ import React, { useState } from "react";
 import '../styles/Home.css';
 import Network from '../assets/Network-Photoroom.png';
 import { useNavigate } from "react-router-dom";
+import haroon from '../assets/haroon1.jpg';
 
 const Home = () => {
+
+
+  const PrintPDF = () => {
+   
+    const pdfWindow = window.open("/Breast_Cancer_NX.pdf", "_blank");
+    if (pdfWindow) {
+      pdfWindow.focus();
+      pdfWindow.onload = function () {
+        pdfWindow.print();
+      };
+    }}
+
+     const handleOpenGitHub = () => {
+    window.open("https://github.com/haroon64/Breast-Cancer-Gene-Network-Analysis", "_blank");
+  };
+
+  
+   const DownloadZip = () => {
+  
+    const link = document.createElement('a');
+    link.href = '/Preprocessed_Data_set.rar'; // relative to public folder
+    link.download = 'Preprocessed_Data_set.rar';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   
 
 
@@ -46,13 +73,13 @@ const Home = () => {
           
         
         <h1>5</h1>
-        <h3>Drugs Analyzed</h3>
+        <h3>Interaction Knowledge</h3>
 
        </div>
         <div className="Home-Stats">
         
-        <h1>1000+</h1>
-        <h3>Drugs Analyzed</h3>
+        <h1>65+</h1>
+        <h3>Gene-Gene Interaction</h3>
 
         </div>
       <div className="Home-Stats">
@@ -100,19 +127,19 @@ const Home = () => {
         <div className="Research-box">
           <h3>Full Research Paper</h3>
           <p>Complete methodology, results, and discussion of network doping approach in breast cancer research.</p>
-          <button>Download PDF</button>
+          <button onClick={PrintPDF}>Download PDF</button>
         </div>
 
          <div className="Research-box">
           <h3>Processed Datasets</h3>
           <p>Access to cleaned and normalized gene expression data, network files, and analysis results.</p>
-          <button>Downlaod Data</button>
+          <button onClick={DownloadZip}>Download Data</button>
         </div>
          <div className="Research-box">
 
           <h3>Source Code </h3>
           <p>Complete analysis pipeline including R scripts, network analysis tools, and visualization code.</p>
-          <button>View Github</button>
+          <button onClick={handleOpenGitHub}>View Github</button>
           </div>
         </div>
 
@@ -139,7 +166,7 @@ const Home = () => {
           
 
           <div className="Team-Members">
-            <img src="" alt="" className=""/>
+            <img src={haroon} alt="" className=""/>
             <h3>Haroon Siddique</h3>
             <h4> Lead Researcher</h4>
             <p>Specialized in bioinformatics and network analysis for cancer research applications.</p>

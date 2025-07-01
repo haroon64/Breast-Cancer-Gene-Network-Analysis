@@ -9,7 +9,7 @@ DB_NAME = "Drug"
 # Collection name
 COLLECTION_NAME = "Drug_info"
 
-PACITAXEL_EFFECtS=["Removed CDC20 (target of Paclitaxel)","Weakened TOP2A—EZH2 from 0.63 to 0.25"
+PACITAXEL_EFFECtS=["Removed CDC20 ","Weakened TOP2A—EZH2 from 0.63 to 0.25"
  , "Weakened MMP1—SPP1 from 0.53 to 0.27"]
 
 
@@ -30,11 +30,7 @@ PACITAXEL = [
     "Impact": "Suggests reduced cooperative behavior among oncogenic genes, potentially lowering resistance mechanisms in breast cancer cells.",
     "reference": "Barretina et al., 2012 [3]"
   },
-  {
-    "interpretation": "The network remains disconnected, implying loss of global communication across gene modules after Paclitaxel impact.",
-    "Impact": "May indicate disruption of integrated regulatory programs that maintain cancer cell plasticity — a beneficial breakdown in aggressive tumors.",
-    "reference": "Weaver, 2014 [1]"
-  },
+  
   {
     "interpretation": "Slight decrease suggests weakened local gene modules (e.g., mitotic complexes), indicating disrupted co-regulated groupings.",
     "Impact": "Local modules often include oncogenic co-expressors; disruption can impair breast tumor growth, especially in HER2+ and basal-like subtypes.",
@@ -51,20 +47,18 @@ PACITAXEL = [
     "reference": "Barretina et al., 2012 [3]"
   },
   {
-    "interpretation": "Slight rise suggests the network becomes more hub-dominated, potentially centralizing function around key surviving regulators.",
-    "Impact": "Breast tumors often depend on hub oncogenes for survival. Increased centralization suggests a need to co-target these hubs to prevent relapse or resistance.",
-    "reference": "Weaver, 2014 [1]"
-  },
-  {
     "interpretation": "No change. Network remains fragmented, indicating persistent lack of complete inter-gene communication.",
     "Impact": "Fragmentation may impair cross-talk between tumorigenic pathways, a favorable outcome in breast cancer as it hampers coordinated tumor progression.",
     "reference": "Orr et al., 2003 [2]"
   },
   {
-    "interpretation": "The network remains disconnected, implying loss of global communication across gene modules after Paclitaxel impact.",
-    "Impact": "May indicate disruption of integrated regulatory programs that maintain cancer cell plasticity — a beneficial breakdown in aggressive tumors.",
+    "interpretation": "Slight rise suggests the network becomes more hub-dominated, potentially centralizing function around key surviving regulators.",
+    "Impact": "Breast tumors often depend on hub oncogenes for survival. Increased centralization suggests a need to co-target these hubs to prevent relapse or resistance.",
     "reference": "Weaver, 2014 [1]"
-  }
+  },
+
+  
+ 
 ]
 
 VINCRISTINE_DOXORUBICIN_CYCLOPHOSPHAMIDE_EFFECTS=[ 
@@ -77,7 +71,7 @@ VINCRISTINE_DOXORUBICIN_CYCLOPHOSPHAMIDE_EFFECTS=[
 VINCRISTINE_DOXORUBICIN_CYCLOPHOSPHAMIDE=[
   {
     "interpretation": "3 nodes removed (CDC20, PRC1, TOP2A) indicate direct drug targeting.",
-    "impact": "These genes are central to mitotic progression and DNA replication. Their removal impairs tumor proliferation.",
+    "Impact": "These genes are central to mitotic progression and DNA replication. Their removal impairs tumor proliferation.",
     "reference": "Satyanarayana et al., 2017; Nitiss, 2009"
   },
   {
@@ -90,21 +84,7 @@ VINCRISTINE_DOXORUBICIN_CYCLOPHOSPHAMIDE=[
     "Impact": "Impairs compensatory signaling loops often exploited by resistant breast cancer subtypes (e.g. basal-like).",
     "reference": "Balko et al., 2012"
   },
-  {
-    "interpretation": "Still disconnected; network fragmentation persists.",
-    "Impact": "Breast tumors maintain multiple independent functional modules (e.g., metabolism, EMT); therapy disrupts only a subset.",
-    "reference": "Koplev et al., 2022"
-  },
-  {
-    "interpretation": "No full reachability among proteins.",
-    "Impact": "Confirms that key tumor subsystems are uncoupled; helpful for precision drug design to target unconnected modules.",
-    "reference": "Barabási et al., 2011"
-  },
-  {
-    "interpretation": "No unique shortest paths; information flow is fragmented.",
-    "Impact": "Reduces systemic propagation of oncogenic signals. This may enhance sensitivity to apoptosis or reduce robustness.",
-    "reference": "Albert et al., 2000"
-  },
+  
   {
     "interpretation": "Local interconnectedness of nodes reduced.",
     "Impact": "Indicates that therapy dismantles local protein complexes (e.g., mitotic or ECM complexes).",
@@ -121,20 +101,19 @@ VINCRISTINE_DOXORUBICIN_CYCLOPHOSPHAMIDE=[
     "reference": "Jeong et al., 2001"
   },
   {
-    "interpretation": "Network control shifts to fewer dominant nodes.",
-    "Impact": "Network becomes more fragile. Further targeting of these central hubs may cripple tumor signaling.",
-    "reference": "Blais et al., 2021"
-  },
-  {
     "interpretation": "Network remains split into two isolated regions.",
     "Impact": "Suggests modular response to therapy — different functional zones (e.g., metabolic vs. proliferative) react independently.",
     "reference": "Hanahan & Weinberg, 2011"
   },
-   {
-    "interpretation": "Still disconnected; network fragmentation persists.",
-    "Impact": "Breast tumors maintain multiple independent functional modules (e.g., metabolism, EMT); therapy disrupts only a subset.",
-    "reference": "Koplev et al., 2022"
+  {
+    "interpretation": "Network control shifts to fewer dominant nodes.",
+    "Impact": "Network becomes more fragile. Further targeting of these central hubs may cripple tumor signaling.",
+    "reference": "Blais et al., 2021"
   },
+
+   
+  
+  
 ]
 
 PACITAXEL_SIROLIMUS_EFFECTS = [" Removed CDC20 (affected by drugs)",
@@ -161,11 +140,7 @@ PACITAXEL_SIROLIMUS=[
     "Impact": "Suggests lower network redundancy; cancer cells may become more vulnerable to stress.",
     "reference": "Jeong et al. (2001)"
   },
-  {
-    "interpretation": "Network fragmentation into disconnected clusters.",
-    "Impact": "Mimics loss of signaling integration in breast cancer after effective chemotherapy. Also may reflect subtype-specific silencing.",
-    "reference": "Han et al. (2004)"
-  },
+  
   {
     "interpretation": "Loss of local modules/co-regulated groups.",
     "Impact": "Indicates collapse of key complexes like mitotic kinases, histone modifiers, and metabolic regulators.",
@@ -186,21 +161,15 @@ PACITAXEL_SIROLIMUS=[
     "Impact": "Reflects emergence of secondary driver genes or potential targets in residual disease.",
     "reference": "Yu et al. (2007)"
   },
-  {
+   {
     "interpretation": "Subdivision of network into isolated parts.",
     "Impact": "Suggests functional decoupling of processes like inflammation (e.g., SPP1), cell cycle, and metabolism — a hallmark of therapy response.",
     "reference": "Barabási et al. (2011), Ideker & Krogan (2012)"
   },
-   {
-    "interpretation": "Network fragmentation into disconnected clusters.",
-    "Impact": "Mimics loss of signaling integration in breast cancer after effective chemotherapy. Also may reflect subtype-specific silencing.",
-    "reference": "Han et al. (2004)"
-  },
-    {
-    "interpretation": "Network fragmentation into disconnected clusters.",
-    "Impact": "Mimics loss of signaling integration in breast cancer after effective chemotherapy. Also may reflect subtype-specific silencing.",
-    "reference": "Han et al. (2004)"
-  },
+  
+ 
+ 
+   
 ]
 
 
@@ -232,11 +201,7 @@ DOXORUBICIN_VORINOSTAT=[
     "Impact": "Fewer interactions suggest effective attenuation of functional pathways sustaining tumorigenesis.",
     "reference": "Vorinostat reduces inter-gene synergy in luminal breast cancer models (Maddocks et al., 2009)."
   },
-  {
-    "interpretation": "Network remains disconnected (≥2 components).",
-    "Impact": "Disconnection of modules suggests loss of crosstalk between major cancer hallmarks (e.g., cell cycle & angiogenesis).",
-    "reference": "Doxorubicin disrupts inter-pathway coherence, reducing tumor plasticity (Gewirtz, 1999)."
-  },
+  
   {
     "interpretation": "Decreased modularity and co-regulation.",
     "Impact": "Breakup of tight modules (e.g., EMT, lipid metabolism) indicates therapy breaking cooperative cancer circuits.",
@@ -252,21 +217,18 @@ DOXORUBICIN_VORINOSTAT=[
     "Impact": "Central nodes (e.g., LEP, MMP1) may retain their roles, suggesting backup signaling hubs that resist therapy.",
     "reference": "Compensatory rewiring via secondary hubs is common in resistant breast tumors (Zhou et al., 2018)."
   },
-  {
-    "interpretation": "More dominance by few central nodes.",
-    "Impact": "Indicates vulnerability: removal of a few key nodes post-therapy could collapse remaining tumor networks.",
-    "reference": "Increased centralization is predictive of tumor fragility post-HDACi treatment (Cheng et al., 2016)."
-  },
-  {
+   {
     "interpretation": "Fragmentation increased, more isolated gene clusters.",
     "Impact": "Splitting into 4 subgraphs may represent complete shutdown of coordinated oncogenic programs.",
     "reference": "Functional disconnection is a strong predictor of therapy success in breast cancer PPI networks (Wang et al., 2012)."
   },
   {
-    "interpretation": "Network remains disconnected (≥2 components).",
-    "Impact": "Disconnection of modules suggests loss of crosstalk between major cancer hallmarks (e.g., cell cycle & angiogenesis).",
-    "reference": "Doxorubicin disrupts inter-pathway coherence, reducing tumor plasticity (Gewirtz, 1999)."
+    "interpretation": "More dominance by few central nodes.",
+    "Impact": "Indicates vulnerability: removal of a few key nodes post-therapy could collapse remaining tumor networks.",
+    "reference": "Increased centralization is predictive of tumor fragility post-HDACi treatment (Cheng et al., 2016)."
   },
+ 
+ 
 ]
 
 
@@ -287,46 +249,40 @@ DOXORUBICIN=[
     "Impact": "A decrease in average neighbors per gene implies lower co-regulation and functional collaboration. This disrupts signaling between oncogenes and tumor suppressors, undermining cooperative behavior that supports cancer progression.",
     "reference": "Jeong et al., 2001"
   },
-  {
-    "interpretation": "Disconnected network; global signal transduction broken.",
-    "Impact": "An infinite network diameter indicates a fully fragmented system. Cancer cell signaling pathways become isolated, preventing robust survival signaling across the tumor tissue.",
-    "reference": "Newman, 2010"
-  },
-  {
-    "interpretation": "As above; minimal distance to furthest node undefined due to disconnection.",
-    "Impact": "Infinite radius confirms that central control nodes can no longer reach all network members. In breast cancer, this limits transcriptional programs responsible for invasion, angiogenesis, and survival.",
-    "reference": "Newman, 2010"
-  },
-  {
-    "interpretation": "Average path length not defined in disconnected network.",
-    "Impact": "Undefined path length shows disrupted communication efficiency. Cancer cells depend on tightly regulated pathways for growth and immune evasion, and this breakdown hinders these functions.",
-    "reference": "Newman, 2010"
-  },
-  {
+   {
     "interpretation": "Weakened local modularity; genes are less tightly co-regulated.",
     "Impact": "A lower clustering coefficient reflects reduced formation of functional protein complexes. In breast cancer, this impairs the formation of modules like cell cycle control complexes or hormone receptor transcription units.",
     "reference": "Watts & Strogatz, 1998"
   },
-  {
+   {
     "interpretation": "Lower density suggests more sparsely connected network.",
     "Impact": "Decreased density reflects the loosening of the tightly knit oncogenic network. Such loss of interconnectivity indicates reduced robustness of tumor-promoting pathways, making cancer cells more sensitive to therapeutic interventions.",
     "reference": "Barabási & Oltvai, 2004"
   },
+   
   {
     "interpretation": "Increased variance in node degree; more hub-centric structure.",
     "Impact": "Higher heterogeneity indicates an uneven distribution of interactions—certain oncogenes like EZH2 become central while others are marginalized. This creates vulnerability, where inhibiting the key hubs could collapse the network.",
     "reference": "Newman, 2002"
   },
   {
+    "interpretation": "Component count remains same but internal structure degraded.",
+    "Impact": "The persistence of two disconnected components implies systemic fragmentation. In breast cancer, this could reflect separation between metabolic and proliferative gene modules, hindering the cancer’s ability to adapt or survive under stress.",
+    "reference": "Albert et al., 2000"
+  },
+   {
     "interpretation": "More centralized network—fewer genes hold more connections.",
     "Impact": "Increased centralization shows that the network relies more on a few central regulators. Breast cancer cells with such topology may be more sensitive to drugs that target these hub genes (e.g., EZH2, CDC20), enabling precision targeting.",
     "reference": "Freeman, 1979"
   },
-  {
-    "interpretation": "Component count remains same but internal structure degraded.",
-    "Impact": "The persistence of two disconnected components implies systemic fragmentation. In breast cancer, this could reflect separation between metabolic and proliferative gene modules, hindering the cancer’s ability to adapt or survive under stress.",
-    "reference": "Albert et al., 2000"
-  }
+
+ 
+  
+  
+ 
+
+ 
+  
 ]
 
 

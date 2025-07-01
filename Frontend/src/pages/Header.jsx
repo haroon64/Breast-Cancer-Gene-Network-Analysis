@@ -27,7 +27,7 @@ const Header = () => {
       <header className="header">
         <div className="header-left" onClick={() => navigate('/')}>
           <img src={logoImage} alt="Breast Cancer Logo" className="logo-img" />
-          <h1 className="logo-text">Breast Cancer</h1>
+          <h1 className="logo-text">BreastNetRx</h1>
         </div>
 
         <nav className="nav">

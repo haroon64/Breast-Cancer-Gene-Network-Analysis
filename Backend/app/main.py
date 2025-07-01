@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import network,network2
+from app.routes import Knowledge_base, network
 
 app = FastAPI(title="Gene Interaction Network API")
 
@@ -17,7 +17,7 @@ app.add_middleware(
 )
 # Include routers
 app.include_router(network.router, prefix="/network", tags=["Gene Network"])
-app.include_router(network2.router2, prefix="/drug_info", tags=["Drugs Information"])
+app.include_router(Knowledge_base.router2, prefix="/drug_info", tags=["Drugs Information"])
 
 # Root endpoint
 @app.get("/")

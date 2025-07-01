@@ -7,7 +7,7 @@ const Advance_drug_doping = () => {
     const [graphData, setGraphData] = useState({ nodes: [], links: [] });
     const [beforeMetrics, setBeforeMetrics] = useState(null);
     const [afterMetrics, setAfterMetrics] = useState(null);
-    const [explanation, setExplanation] = useState("");
+    const [explanation, setExplanation] = useState([]);
     const [effects, setEffects] = useState([]);
     const fgRef = useRef();
     const fgRef1 = useRef();
@@ -19,10 +19,6 @@ const Advance_drug_doping = () => {
     });
     const [afterGraphData, setAfterGraphData] = useState({ nodes: [], links: [] });
     const [metrics, setMetrics] = useState(null);
-
-    // Separate hoveredLink state for before and after networks
-    const [hoveredLinkBefore, setHoveredLinkBefore] = useState(null);
-    const [hoveredLinkAfter, setHoveredLinkAfter] = useState(null);
 
     useEffect(() => {
         fetch("http://127.0.0.1:8000/network/fetch-network")
@@ -77,11 +73,6 @@ const Advance_drug_doping = () => {
         return group;
     };
 
-    const linkThreeObject = (link) => {
-        // No custom 3D object for links, use default
-        return null;
-    };
-
     useEffect(() => {
         const resize = () => {
             if (beforeRef.current) {
@@ -122,7 +113,7 @@ const Advance_drug_doping = () => {
     const [selectedDrugs, setSelectedDrugs] = useState(drugOptions[0].value);
 
     const handleDropdownChange = (e) => {
-        const idx = e.target.value;
+        const idx = Number(e.target.value);
         setSelectedDrugs(drugOptions[idx].value);
 
         fetch("http://127.0.0.1:8000/network/fetch-network")
@@ -204,112 +195,18 @@ const Advance_drug_doping = () => {
         { key: "nodes", label: "Nodes" },
         { key: "edges", label: "Edges" },
         { key: "avg_neighbors", label: "Avg Neighbors" },
-        { key: "radius", label: "Radius" },
+       
         { key: "clustering_coefficient", label: "Clustering Coefficient" },
         { key: "density", label: "Network density" },
         { key: "heterogeneity", label: "Network Heterogeneity" },
         { key: "connected_components", label: "Connected Components" },
         { key: "centralization", label: "Network centralization" },
-        { key: "diameter", label: "Diameter" },
+       
     ];
 
-    const linkKey = (l) => `${typeof l.source === 'object' ? l.source.id : l.source}-${typeof l.target === 'object' ? l.target.id : l.target}`;
-
-    // Edge highlighting and label on hover for before and after
-    const getLinkWidthBefore = (l) => {
-        if (
-            hoveredLinkBefore &&
-            linkKey(l) === linkKey(hoveredLinkBefore)
-        ) {
-            return l.weight * 2.5;
-        }
-        return l.weight * 1.5;
-    };
-    const getLinkWidthAfter = (l) => {
-        if (
-            hoveredLinkAfter &&
-            linkKey(l) === linkKey(hoveredLinkAfter)
-        ) {
-            return l.weight * 2.5;
-        }
-        return l.weight * 1.5;
-    };
-    const getLinkColorBefore = (l) => {
-        if (
-            hoveredLinkBefore &&
-            linkKey(l) === linkKey(hoveredLinkBefore)
-        ) {
-            return "#222";
-        }
-        return "#000";
-    };
-    const getLinkColorAfter = (l) => {
-        if (
-            hoveredLinkAfter &&
-            linkKey(l) === linkKey(hoveredLinkAfter)
-        ) {
-            return "#222";
-        }
-        return "#000";
-    };
-
-    // Tooltip for link label on hover (not click)
-    const [tooltipBefore, setTooltipBefore] = useState({ visible: false, x: 0, y: 0, text: '', linkKey: '' });
-    const [tooltipAfter, setTooltipAfter] = useState({ visible: false, x: 0, y: 0, text: '', linkKey: '' });
-
-    // Show label and highlight edge on hover for BEFORE
-    const handleLinkHoverBefore = (link, event) => {
-        setHoveredLinkBefore(link || null);
-        if (link && event) {
-            setTooltipBefore({
-                visible: true,
-                x: event.clientX,
-                y: event.clientY,
-                text: `Weight: ${link.weight}`,
-                linkKey: linkKey(link)
-            });
-        } else {
-            setTooltipBefore({ visible: false, x: 0, y: 0, text: '', linkKey: '' });
-        }
-    };
-
-    // Show label and highlight edge on hover for AFTER
-    const handleLinkHoverAfter = (link, event) => {
-        setHoveredLinkAfter(link || null);
-        if (link && event) {
-            setTooltipAfter({
-                visible: true,
-                x: event.clientX,
-                y: event.clientY,
-                text: `Weight: ${link.weight}`,
-                linkKey: linkKey(link)
-            });
-        } else {
-            setTooltipAfter({ visible: false, x: 0, y: 0, text: '', linkKey: '' });
-        }
-    };
-
-    // Hide tooltip on mouse leave (for both)
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            if (hoveredLinkBefore && tooltipBefore.visible) {
-                setTooltipBefore((prev) => ({
-                    ...prev,
-                    x: e.clientX,
-                    y: e.clientY
-                }));
-            }
-            if (hoveredLinkAfter && tooltipAfter.visible) {
-                setTooltipAfter((prev) => ({
-                    ...prev,
-                    x: e.clientX,
-                    y: e.clientY
-                }));
-            }
-        };
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, [hoveredLinkBefore, hoveredLinkAfter, tooltipBefore.visible, tooltipAfter.visible]);
+    // Simple link color and width (no hover)
+    const getLinkColor = () => "#000000";
+    const getLinkWidth = (l) => Math.max(l.weight * 1.5, 1);
 
     return (
         <div className="Container1">
@@ -336,65 +233,38 @@ const Advance_drug_doping = () => {
                 </div>
                 <div className='Impact-container'>
                     <h3>Impact of Doping with {selectedDrugs.replace(/\+/g, " + ")}</h3>
-                    <div>
+                    <ul>
                         {effects && effects.length > 0 && (
                             effects.map((effect, idx) => (
-                                <ul key={idx}>
-                                    <a>{effect}</a>
-                                </ul>
+                                <li key={idx}>{effect}</li>
                             ))
                         )}
-                    </div>
+                    </ul>
                 </div>
             </div>
 
             <div className="network-section">
                 <div className="before-network" >
                     <div className="panel-header">
-                        <h2 className="panel-title">Before Drug Doping</h2>
+                        <h2 className="panel-title">BEFORE DRUG DOPING</h2>
                     </div>
                     <div className="boxed" ref={beforeRef} style={{ position: 'relative' }}>
                         <ForceGraph3D
                             ref={fgRef1}
                             graphData={graphData}
                             nodeThreeObject={nodeThreeObject}
-                            linkThreeObjectExtend={true}
-                            linkThreeObject={linkThreeObject}
                             linkDirectionalParticles={2}
-                            linkDirectionalParticleWidth={(l) => l.weight * 1.2}
-                            linkWidth={getLinkWidthBefore}
-                            linkColor={getLinkColorBefore}
-                            linkOpacity={1}
-                            linkMaterial={new THREE.MeshBasicMaterial({ color: "black", transparent: false })}
+                            linkWidth={getLinkWidth}
+                            linkColor={getLinkColor}
+                            linkOpacity={0.8}
                             enableNodeDrag={false}
                             enableNavigationControls
                             warmupTicks={0}
                             cooldownTicks={0}
                             width={dimensions.width}
                             height={dimensions.height}
-                            linkLabel={() => ''} // No default label, we show our own
-                            onLinkHover={handleLinkHoverBefore}
-                            onLinkClick={null}
+                          
                         />
-                        {/* Tooltip for link weight */}
-                        {tooltipBefore.visible && (
-                            <div
-                                style={{
-                                    position: 'fixed',
-                                    left: tooltipBefore.x + 10,
-                                    top: tooltipBefore.y - 30,
-                                    background: 'rgba(0,0,0,0.8)',
-                                    color: 'white',
-                                    padding: '4px 10px',
-                                    borderRadius: 4,
-                                    pointerEvents: 'none',
-                                    zIndex: 1000,
-                                    fontSize: 14
-                                }}
-                            >
-                                {tooltipBefore.text}
-                            </div>
-                        )}
                     </div>
                     <div className="network-stats">
                         <div className="stat-item">
@@ -409,50 +279,24 @@ const Advance_drug_doping = () => {
                 </div>
                 <div className="after-network" >
                     <div className="panel-header">
-                        <h2 className="panel-title">After Drug Doping</h2>
+                        <h2 className="panel-title">AFTER DRUG DOPING</h2>
                     </div>
                     <div className="boxed" ref={afterRef} style={{ position: 'relative' }}>
                         <ForceGraph3D
                             ref={fgRef}
                             graphData={afterGraphData}
                             nodeThreeObject={nodeThreeObject}
-                            linkThreeObjectExtend={true}
-                            linkThreeObject={linkThreeObject}
                             linkDirectionalParticles={2}
-                            linkDirectionalParticleWidth={(l) => l.weight * 1.2}
-                            linkWidth={getLinkWidthAfter}
-                            linkColor={getLinkColorAfter}
-                            linkOpacity={1}
-                            linkMaterial={new THREE.MeshBasicMaterial({ color: "black", transparent: false })}
+                            linkWidth={getLinkWidth}
+                            linkColor={getLinkColor}
+                            linkOpacity={0.8}
                             enableNodeDrag={false}
                             enableNavigationControls
                             warmupTicks={0}
                             cooldownTicks={0}
                             width={dimensions.width}
                             height={dimensions.height}
-                            linkLabel={() => ''} // No default label, we show our own
-                            onLinkHover={handleLinkHoverAfter}
-                            onLinkClick={null}
                         />
-                        {/* Tooltip for link weight */}
-                        {tooltipAfter.visible && (
-                            <div
-                                style={{
-                                    position: 'fixed',
-                                    left: tooltipAfter.x + 10,
-                                    top: tooltipAfter.y - 30,
-                                    background: 'rgba(0,0,0,0.8)',
-                                    color: 'white',
-                                    padding: '4px 10px',
-                                    borderRadius: 4,
-                                    pointerEvents: 'none',
-                                    zIndex: 1000,
-                                    fontSize: 14
-                                }}
-                            >
-                                {tooltipAfter.text}
-                            </div>
-                        )}
                     </div>
                     <div className="network-stats">
                         <div className="stat-item">

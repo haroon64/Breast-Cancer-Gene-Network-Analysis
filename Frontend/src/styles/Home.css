@@ -31,6 +31,7 @@
   text-align: center;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   /* margin: 40px 0; */
+  
   border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
@@ -68,7 +69,7 @@
 .Home-Header p {
   font-size: 1.4rem;
   color: #5a6c7d;
-  font-weight: 400;
+  font-weight: 400; 
   margin-bottom: 30px;
   max-width: 800px;
   margin-left: auto;

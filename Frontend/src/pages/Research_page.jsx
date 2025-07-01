@@ -238,11 +238,11 @@ const Research_page = () => {
       setEdgeContextMenu({ visible: false });
     }}>
       <header>
-        <h1>Breast Cancer Gene Network</h1>
+        <h1>For Your Own Research</h1>
       </header>
       <div className="network-container">
         <div className="control-panel">
-          <h3>Controls</h3>
+          <h3>CONTROLS</h3>
           <button onClick={fetchNetwork}>Fetch Network</button>
           <button onClick={Compute_results} disabled={!networkFetched}>Compute Results</button>
         </div>
@@ -252,7 +252,7 @@ const Research_page = () => {
         </div>
 
         <div className="results-box">
-          <h3>Network Metrics</h3>
+          <h3>NETWORK METRICS</h3>
           {metrics ? (
             <ul>
               <li> Nodes: {metrics.metrics.nodes ?? "N/A"}</li>

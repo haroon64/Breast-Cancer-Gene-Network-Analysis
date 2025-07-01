@@ -217,8 +217,8 @@ canvas {
     transition: all var(--transition-smooth);
     backdrop-filter: blur(10px);
     margin-bottom:10px ;
-    min-height: 320px;
-    max-height: 320px;
+    min-height: 380px;
+    max-height: 380px;
     
 
 
@@ -240,27 +240,49 @@ canvas {
 }
 
 .Impact-container h3 {
-       margin: 0 0 var(--spacing-md) 0;
+    margin: 0 0 var(--spacing-md) 0;
     font-size: 18px;
     font-weight: 600;
     color: var(--primary-color);
     border-bottom: 2px solid var(--primary-light);
     padding-bottom: var(--spacing-xs);
 
-}.Impact-container a:last-child {
-    border-bottom: none;
-} 
-
+}
 .Impact-container a:hover {
     background: var(--primary-light);
     padding-left: var(--spacing-xs);
     border-radius: var(--border-radius-small);
 }
 
-.Impact-container a strong {
+
+
+
+.Impact-container li {
+    padding: var(--spacing-xs) 0;
+    border-bottom: 0.5px solid var(--border-light);
+    font: bold 12px var(--font-family);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    transition: background var(--transition-fast);
+}
+
+.Impact-container li:last-child {
+    border-bottom: none;
+}
+
+.Impact-container li:hover {
+    background: var(--primary-light);
+    padding-left: var(--spacing-xs);
+    border-radius: var(--border-radius-small);
+}
+
+.Impact-container li strong {
     color: var(--primary-color);
     font-weight: 600;
 }
+
 
 /* === Control Panel === */
 .Control-pannel {
@@ -324,6 +346,7 @@ canvas {
 .panel-header {
     display: flex;
     align-items: center;
+    background-color: black;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     padding-bottom: var(--spacing-md);
@@ -334,7 +357,8 @@ canvas {
 .panel-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    margin-top:6px ;
+    color: white;
     letter-spacing: -0.01em;
 }
 
@@ -443,6 +467,7 @@ canvas {
 
 /* === Statistics Section === */
 .metrics-section {
+   
     overflow-x: auto;
     background: var(--background-primary);
     padding: var(--spacing-lg) 0;

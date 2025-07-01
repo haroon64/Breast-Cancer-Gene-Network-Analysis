@@ -35,6 +35,7 @@ const Network3d = () => {
       .catch((err) => console.error(err));
   }, []);
 
+
   const nodeThreeObject = (node) => {
     const group = new THREE.Group();
     const r = 16;
@@ -128,7 +129,7 @@ const Network3d = () => {
       linkKey(l) === linkKey(hoveredLink)
     ) {
       return l.weight * 2.5;
-    }
+    } 
     return l.weight * 1.5;
   };
 

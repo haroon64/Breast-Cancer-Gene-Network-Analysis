@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: row;
+
+  box-sizing: border-box;
+  background-color: rgb(233, 59, 15);
+  width: 100%;
+  /* justify-content: center; */
+  align-items: flex-end;
+  
+}
+
+.box1{
+  border: 1px solid black;
+  padding: 20px;
+  /* flex: 1; */
+  width: 20%;
+  background-color: lightblue;
+}
+.box2{
+  border: 1px solid black;
+  padding: 20px;
+  /* flex: 2; */
+  background-color: aqua;
+  width: 20%;
+}
+.box3{
+  border: 1px solid black;
+  padding: 20px;
+  /* flex: 1; */
+  background-color: lightgreen;
+   width: 20%;
+}

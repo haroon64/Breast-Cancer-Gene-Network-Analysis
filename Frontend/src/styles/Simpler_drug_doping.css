@@ -102,16 +102,18 @@ header h1::after {
     box-shadow: var(--shadow-heavy);
 }
 
+
+
 .control-panel h3,
 .results-box h3,
 .impact-box h3
  {
     margin: 0 0 var(--spacing-md) 0;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--primary-color);
     border-bottom: 2px solid var(--primary-light);
-    padding-bottom: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs;
 }
 
 /* Enhanced Button Styling */
@@ -253,6 +255,10 @@ select:hover {
     color: var(--primary-color);
     font-weight: 600;
 }
+
+
+
+
 
 
 /* Impact box  */

@@ -54,12 +54,14 @@
 
 /* Network Visualization Container */
 .Network3d-box {
-  background: #e4d9d9;
+  background: black;
   border-radius: 30px;
+  /* margin-right: ; */
   box-shadow: 
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  margin: 0 2rem;
+  margin: 0 3.7rem;
+  margin-bottom: 3.5rem;
   padding: 1rem;
   width: 90%;
   position: relative;

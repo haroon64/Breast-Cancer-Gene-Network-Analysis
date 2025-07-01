@@ -240,7 +240,7 @@ const SimplerDrugDoping = () => {
             <div className="network-container">
                 <div className="control-impact-box" >
                   <div className="control-panel">
-                    <h3>Controls</h3>
+                    <h3>CONTROLS</h3>
                     <button onClick={fetch_original_network}>Fetch Network</button>
                     <button onClick={fetchNetwork}>Map and Reduce </button>
                     <button 
@@ -267,8 +267,8 @@ const SimplerDrugDoping = () => {
                 <div className="network-box">
                     <div ref={networkRef} style={{ width: "600px", height: "419px", border: "1px solid black" }}></div>
                 </div>
-                <div className="Impact-container">
-                    <h3>Dictionary</h3>
+                <div className="results-box">
+                    <h3>DICTIONARY</h3>
                     {dict && Object.keys(dict).length > 0 ? (
                         <div>
                             <ul>
