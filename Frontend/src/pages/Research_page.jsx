@@ -4,7 +4,7 @@ import axios from "axios";
 import "vis-network/styles/vis-network.css";
 import "../styles/Network.css";
 
-const NetworkVisualization = () => {
+const Research_page = () => {
   const networkRef = useRef(null);
   const [nodes, setNodes] = useState(new DataSet([]));
   const [edges, setEdges] = useState(new DataSet([]));
@@ -258,11 +258,11 @@ const NetworkVisualization = () => {
               <li> Nodes: {metrics.metrics.nodes ?? "N/A"}</li>
               <li> Edges: {metrics.metrics.edges ?? "N/A"}</li>
               <li> Avg. Neighbors: {metrics.metrics.avg_neighbors?.toFixed() ?? "N/A"}</li>
-              <li> Diameter: {metrics.metrics.diameter ?? "N/A"}</li>
+              {/* <li> Diameter: {metrics.metrics.diameter ?? "N/A"}</li> */}
               <li> Centralization: {metrics.metrics.centralization?.toFixed(10) ?? "N/A"}</li>
               <li> Density: {metrics.metrics.density?.toFixed(10) ?? "N/A"}</li>
-              <li> Radius: {metrics.metrics.radius ?? "N/A"}</li>
-              <li> Path Length: {metrics.metrics.char_path_length ?? "N/A"}</li>
+              {/* <li> Radius: {metrics.metrics.radius ?? "N/A"}</li> */}
+              {/* <li> Path Length: {metrics.metrics.char_path_length ?? "N/A"}</li> */}
               <li> Clustering Coefficient: {metrics.metrics.clustering_coefficient?.toFixed(10) ?? "N/A"}</li>
               <li> Heterogeneity: {metrics.metrics.heterogeneity?.toFixed(10) ?? "N/A"}</li>
               <li> Connected Components: {metrics.metrics.connected_components ?? "N/A"}</li>
@@ -286,4 +286,4 @@ const NetworkVisualization = () => {
   );
 };
 
-export default NetworkVisualization;
+export default Research_page;

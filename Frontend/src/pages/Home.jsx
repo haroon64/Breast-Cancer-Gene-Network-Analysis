@@ -123,11 +123,20 @@ const Home = () => {
           <div className="Team-container">
           <div className="Team-Members">
              <img src="" alt="" className=""/>
+            <h3>Tayyiba Arshad</h3>
+            <h4> Research Supervisor</h4>
+            <p>Faculty advisor with expertise in computational oncology and systems biology.</p>
+          
+          </div>
+
+           <div className="Team-Members">
+             <img src="" alt="" className=""/>
             <h3>Abdullah Saqib</h3>
             <h4> Lead Researcher</h4>
             <p>Specialized in bioinformatics and network analysis for cancer research applications.</p>
           
           </div>
+          
 
           <div className="Team-Members">
             <img src="" alt="" className=""/>

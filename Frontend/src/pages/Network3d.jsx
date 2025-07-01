@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import ForceGraph3D from "react-force-graph-3d";
 import * as THREE from "three";
-import "../styles/Network3d.css"; // Ensure you have this CSS file for styling
+import "../styles/Network3d.css";
+
 const Network3d = () => {
   const [graphData, setGraphData] = useState({ nodes: [], links: [] });
   const fgRef = useRef();
@@ -13,7 +14,7 @@ const Network3d = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/network/fetch-network1")
+    fetch("http://127.0.0.1:8000/network/fetch-network")
       .then((res) => res.json())
       .then((data) => {
         const N = data.nodes.length;
@@ -63,61 +64,14 @@ const Network3d = () => {
     return group;
   };
 
-  const linkThreeObject = (link) => {
-    const src = typeof link.source === "object" ? link.source : graphData.nodes.find(n => n.id === link.source);
-    const tgt = typeof link.target === "object" ? link.target : graphData.nodes.find(n => n.id === link.target);
+  // Helper to identify a link uniquely
+  const linkKey = (l) =>
+    (typeof l.source === "object" ? l.source.id : l.source) +
+    "-" +
+    (typeof l.target === "object" ? l.target.id : l.target);
 
-    if (!src || !tgt) return null;
-
-    // Position label at the center of the edge
-    const t = 0.5;
-    const pos = {
-      x: src.x + (tgt.x - src.x) * t,
-      y: src.y + (tgt.y - src.y) * t,
-      z: src.z + (tgt.z - src.z) * t,
-    };
-
-    const canvas = document.createElement("canvas");
-    canvas.width = 128;
-    canvas.height = 64;
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = "bold 36px Arial";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-
-    // Rounded background
-    const radius = 18;
-    ctx.beginPath();
-    ctx.moveTo(10, radius);
-    ctx.arcTo(10, 10, canvas.width - 10, 10, radius);
-    ctx.arcTo(canvas.width - 10, 10, canvas.width - 10, canvas.height - 10, radius);
-    ctx.arcTo(canvas.width - 10, canvas.height - 10, 10, canvas.height - 10, radius);
-    ctx.arcTo(10, canvas.height - 10, 10, 10, radius);
-    ctx.closePath();
-    ctx.fillStyle = "rgba(255,255,255,0.85)";
-    ctx.fill();
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 4;
-    ctx.stroke();
-
-    // Draw weight
-    ctx.fillStyle = "#000";
-    ctx.fillText(link.weight.toString(), canvas.width / 2, canvas.height / 2);
-
-    const texture = new THREE.CanvasTexture(canvas);
-    const sprite = new THREE.Sprite(
-      new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false })
-    );
-    sprite.scale.set(32, 16, 1);
-    sprite.position.set(pos.x, pos.y, pos.z);
-
-    sprite.onBeforeRender = function (renderer, scene, camera) {
-      sprite.quaternion.copy(camera.quaternion);
-    };
-
-    return sprite;
-  };
+  // Custom link object for label (not needed for color)
+  const linkThreeObject = (link) => null;
 
   useEffect(() => {
     const resize = () => {
@@ -125,11 +79,30 @@ const Network3d = () => {
         const rect = containerRef.current.getBoundingClientRect();
         setDimensions({ width: rect.width, height: rect.height });
       }
+      if (fgRef.current && graphData.nodes.length > 0) {
+        const avg = graphData.nodes.reduce(
+          (acc, n) => {
+            acc.x += n.fx ?? n.x ?? 0;
+            acc.y += n.fy ?? n.y ?? 0;
+            acc.z += n.fz ?? n.z ?? 0;
+            return acc;
+          },
+          { x: 0, y: 0, z: 0 }
+        );
+        avg.x /= graphData.nodes.length;
+        avg.y /= graphData.nodes.length;
+        avg.z /= graphData.nodes.length;
+        fgRef.current.cameraPosition(
+          { x: avg.x, y: avg.y, z: avg.z + 800 },
+          { x: avg.x, y: avg.y, z: avg.z },
+          1000
+        );
+      }
     };
     window.addEventListener("resize", resize);
     resize();
     return () => window.removeEventListener("resize", resize);
-  }, []);
+  }, [graphData.nodes.length]);
 
   useEffect(() => {
     if (fgRef.current) {
@@ -137,18 +110,39 @@ const Network3d = () => {
     }
   }, [graphData]);
 
+  // Custom link color: darker on hover
+  const getLinkColor = (l) => {
+    if (
+      hoveredLink &&
+      linkKey(l) === linkKey(hoveredLink)
+    ) {
+      return "#222"; // darker color on hover
+    }
+    return "#000"; // normal color
+  };
+
+  // Custom link width: slightly thicker on hover
+  const getLinkWidth = (l) => {
+    if (
+      hoveredLink &&
+      linkKey(l) === linkKey(hoveredLink)
+    ) {
+      return l.weight * 2.5;
+    }
+    return l.weight * 1.5;
+  };
+
   return (
     <>
-      <div className="Network3d-container" >
-        
+      <div className="Network3d-container">
         <div>
-          <h1 className="title-1">Network Visualization</h1>
-
+          <h1 className="title-1">Protein Gene Network</h1>
+          <p className="description">
+            This network displays interactions among 28 key genes differentially expressed in breast cancer. Genes like EZH2, TOP2A, LEP, and SPP1 are central to processes such as tumor progression, cell cycle regulation, and metabolism. The edges represent protein–protein interactions, highlighting how these genes function collectively rather than in isolation. Such network-based analysis helps identify critical nodes that may serve as potential biomarkers or drug targets in breast cancer therapy.
+          </p>
         </div>
-        
-
       </div>
-      <div className="Network3d-box"ref={containerRef} >
+      <div className="Network3d-box" ref={containerRef}>
         <ForceGraph3D
           ref={fgRef}
           graphData={graphData}
@@ -157,8 +151,8 @@ const Network3d = () => {
           linkThreeObject={linkThreeObject}
           linkDirectionalParticles={2}
           linkDirectionalParticleWidth={(l) => l.weight * 1.2}
-          linkWidth={(l) => l.weight * 1.5}
-          linkColor={() => "black"}
+          linkWidth={getLinkWidth}
+          linkColor={getLinkColor}
           linkOpacity={1}
           linkMaterial={new THREE.MeshBasicMaterial({ color: "black", transparent: false })}
           enableNodeDrag={false}
@@ -169,7 +163,6 @@ const Network3d = () => {
           height={dimensions.height}
           onLinkHover={setHoveredLink}
           linkLabel={(l) => `Weight: ${l.weight}`}
-          
         />
       </div>
     </>

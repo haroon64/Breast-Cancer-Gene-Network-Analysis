@@ -1,30 +1,202 @@
+/* Protein Gene Network Page Styles */
+
+/* Container Styles */
 .Network3d-container {
- 
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  background-color: #111;
-  padding: 10px;
-  border-radius: 10px;
-  flex-direction: column;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 3rem 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
 }
-.title-1{
-    text-align: center;
-    font-size: 2rem;
-    color: #ffffff;
-    margin-bottom: 2rem;
 
-
+.Network3d-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  pointer-events: none;
 }
- .Network3d-box{
-    flex: 1;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    padding: 10px;
-    height: 100%;
-    background-color: #fff;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
+
+.Network3d-container > div {
   
- }
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Typography */
+.title-1 {
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+}
+
+.description {
+  font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  font-weight: 400;
+}
+
+/* Network Visualization Container */
+.Network3d-box {
+  background: #e4d9d9;
+  border-radius: 30px;
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  margin: 0 2rem;
+  padding: 1rem;
+  width: 90%;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.Network3d-box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.02) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.Network3d-box > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Network3d-container {
+    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .title-1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .Network3d-box {
+    margin: 0 1rem;
+    padding: 0.5rem;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Network3d-container {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .title-1 {
+    font-size: 2rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+  }
+  
+  .Network3d-box {
+    margin: 0 0.5rem;
+  }
+}
+
+/* Enhanced Visual Effects */
+.Network3d-container {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.Network3d-box {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Effects for Interactive Elements */
+.Network3d-box:hover {
+  box-shadow: 
+    0 25px 35px -5px rgba(0, 0, 0, 0.15),
+    0 15px 15px -5px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Loading State (Optional) */
+.Network3d-box.loading {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Focus States for Accessibility */
+.Network3d-box:focus-within {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  .Network3d-container {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  
+  .title-1,
+  .description {
+    color: black !important;
+    text-shadow: none !important;
+  }
+  
+  .Network3d-box {
+    box-shadow: 0 0 0 1px #ccc !important;
+  }
+}

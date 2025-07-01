@@ -74,23 +74,44 @@
   margin-left: auto;
   margin-right: auto;
 }
-
 .Home-Network {
-  margin-top: 30px;
+    margin-top: 30px;
     margin: auto;
-  border-radius: 100px;
-  background-color: #ffffff;
-  height: 20%;
-  width: 40%;
+    border-radius: 100px;
+    background-color: #ffffff;
+    height: 20%;
+    width: 40%;
+    /* Add a subtle fade-in and scale animation */
+    animation: networkFadeIn 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
 
-  
+@keyframes networkFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .Home-Network img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    /* Add a floating animation to the image */
+    animation: networkFloat 3s ease-in-out infinite;
+}
+
+@keyframes networkFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-18px);
+    }
 }
 
 /* Description Section */

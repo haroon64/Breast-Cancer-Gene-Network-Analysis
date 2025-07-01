@@ -267,7 +267,7 @@ const SimplerDrugDoping = () => {
                 <div className="network-box">
                     <div ref={networkRef} style={{ width: "600px", height: "419px", border: "1px solid black" }}></div>
                 </div>
-                <div className="results-box">
+                <div className="Impact-container">
                     <h3>Dictionary</h3>
                     {dict && Object.keys(dict).length > 0 ? (
                         <div>
