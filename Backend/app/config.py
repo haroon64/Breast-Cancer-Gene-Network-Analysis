@@ -35,6 +35,7 @@ PACITAXEL = [
     "interpretation": "Slight decrease suggests weakened local gene modules (e.g., mitotic complexes), indicating disrupted co-regulated groupings.",
     "Impact": "Local modules often include oncogenic co-expressors; disruption can impair breast tumor growth, especially in HER2+ and basal-like subtypes.",
     "reference": "Orr et al., 2003 [2]"
+    
   },
   {
     "interpretation": "Barely changed. Indicates proportional connectivity remains, though structure has shifted (node loss balanced by edge weakening).",
@@ -62,9 +63,9 @@ PACITAXEL = [
 ]
 
 VINCRISTINE_DOXORUBICIN_CYCLOPHOSPHAMIDE_EFFECTS=[ 
-    "Removed CDC20 (affected by drugs)",
- "Removed TOP2A (affected by drugs)",
- "Removed PRC1 (affected by drugs)",
+    "Removed CDC20 ",
+ "Removed TOP2A ",
+ "Removed PRC1 ",
  "Weakened LEP—ADIPOQ from 0.99 to 0.40",
  "Weakened SPP1—MMP1 from 0.53 to 0.27",
  "Weakened CIDEC—CFD from 0.58 to 0.23]"]
@@ -116,10 +117,10 @@ VINCRISTINE_DOXORUBICIN_CYCLOPHOSPHAMIDE=[
   
 ]
 
-PACITAXEL_SIROLIMUS_EFFECTS = [" Removed CDC20 (affected by drugs)",
- "Removed EZH2 (affected by drugs)",
-  "Removed TOP2A (affected by drugs)",
-  "Removed PRC1 (affected by drugs)",
+PACITAXEL_SIROLIMUS_EFFECTS = [" Removed CDC20 ",
+ "Removed EZH2 ",
+  "Removed TOP2A ",
+  "Removed PRC1 ",
   "Weakened MMP1—SPP1 from 0.53 to 0.27",
   "Weakened LEP—ADIPOQ from 0.99 to 0.30",
   "Weakened CIDEC—CFD from 0.58 to 0.23",]
@@ -174,11 +175,11 @@ PACITAXEL_SIROLIMUS=[
 
 
 DOXORUBICIN_VORINOSTAT_EFFECTS=[
-   " Removed EZH2 (affected by drugs)",
-  "Removed TOP2A (affected by drugs)",
-  "Removed PRC1 (affected by drugs)",
-  "Removed CDC20 (affected by drugs)",
-  "Removed S100B (affected by drugs)",
+   " Removed EZH2 ",
+  "Removed TOP2A ",
+  "Removed PRC1 ",
+  "Removed CDC20 ",
+  "Removed S100B ",
   "Weakened MMP1—SPP1 from 0.53 to 0.27",
   "Weakened LEP—ADIPOQ from 0.99 to 0.30",
   "Weakened CIDEC—CFD from 0.58 to 0.23",

@@ -242,7 +242,7 @@ const SimplerDrugDoping = () => {
                   <div className="control-panel">
                     <h3>CONTROLS</h3>
                     <button onClick={fetch_original_network}>Fetch Network</button>
-                    <button onClick={fetchNetwork}>Map and Reduce </button>
+                    <button onClick={fetchNetwork}>Map</button>
                     <button 
                         onClick={handledopDrugDoxorubicin} 
                         disabled={!mapReducePressed}

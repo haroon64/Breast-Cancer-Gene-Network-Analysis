@@ -10,10 +10,10 @@ app = FastAPI(title="Gene Interaction Network API")
 # 🔥 Allow CORS for Frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # ✅ Allow frontend URL
+    allow_origins=["*"],  # ✅ Allow all origins
     allow_credentials=True,
-    allow_methods=["*"],  # ✅ Allow all HTTP methods (GET, POST, DELETE, etc.)
-    allow_headers=["*"],  # ✅ Allow all headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 # Include routers
 app.include_router(network.router, prefix="/network", tags=["Gene Network"])

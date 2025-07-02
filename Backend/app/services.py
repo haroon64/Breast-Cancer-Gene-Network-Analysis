@@ -8,7 +8,7 @@ from app.models import DrugInfo
 from app.database import mongodb_client,Collection
 
 
-from bson import ObjectId
+
 
 # Fetch gene interactions from STRING API
 def fetch_gene_network(selected_genes: list):
@@ -32,19 +32,39 @@ def create_network_graph(interactions):
 # Compute network metrics
 def calculate_metrics(G):
     """Calculate graph metrics with NaN handling."""
+  
+
+
+
     metrics = {
-        "nodes": G.number_of_nodes(),
-        "edges": G.number_of_edges(),
-        "avg_neighbors": np.mean([d for _, d in G.degree()]) if G.number_of_nodes() > 0 else 0,
-        "diameter": nx.diameter(G) if nx.is_connected(G) else None,
-        "radius": nx.radius(G) if nx.is_connected(G) else None,
-        "char_path_length": nx.average_shortest_path_length(G) if nx.is_connected(G) else None,
-        "clustering_coefficient": nx.average_clustering(G),
-        "density": nx.density(G),
-        "heterogeneity": nx.degree_pearson_correlation_coefficient(G) if G.number_of_edges() > 0 else 0,
-        "centralization": max(dict(G.degree()).values()) / (G.number_of_nodes() - 1) if G.number_of_nodes() > 1 else 0,
-        "connected_components": nx.number_connected_components(G),
-    }
+    "nodes": G.number_of_nodes(),
+    "edges": G.number_of_edges(),
+    "avg_neighbors": np.mean([d for _, d in G.degree()]) if G.number_of_nodes() > 0 else 0,
+    "diameter": nx.diameter(G) if nx.is_connected(G) else None,
+    "radius": nx.radius(G) if nx.is_connected(G) else None,
+
+    # Weighted shortest path metrics (only for connected graphs)
+    "char_path_length": nx.average_shortest_path_length(G, weight="weight") if nx.is_connected(G) else None,
+    
+    # Weighted closeness centrality average
+    "avg_closeness_weighted": np.mean(list(nx.closeness_centrality(G, distance="weight").values())) if G.number_of_nodes() > 0 else 0,
+
+    # Weighted betweenness centrality average
+    "avg_betweenness_weighted": np.mean(list(nx.betweenness_centrality(G, weight="weight").values())) if G.number_of_nodes() > 0 else 0,
+
+    # Note: NetworkX does not support weighted clustering directly; needs manual approach or ignore
+    "clustering_coefficient": nx.average_clustering(G, weight="weight"),
+
+    "density": nx.density(G),
+
+    # Degree assortativity (still unweighted, unless you model something custom)
+    "heterogeneity": nx.degree_pearson_correlation_coefficient(G) if G.number_of_edges() > 0 else 0,
+
+    # Degree centralization (unweighted)
+    "centralization": max(dict(G.degree()).values()) / (G.number_of_nodes() - 1) if G.number_of_nodes() > 1 else 0,
+
+    "connected_components": nx.number_connected_components(G),
+}
 
     # Convert NaN or inf values to 0
     for key, value in metrics.items():

@@ -3,6 +3,8 @@ import '../styles/Home.css';
 import Network from '../assets/Network-Photoroom.png';
 import { useNavigate } from "react-router-dom";
 import haroon from '../assets/haroon1.jpg';
+import mam from '../assets/mam.jpg';
+import Abdullah from '../assets/Abdullah.jpg'
 
 const Home = () => {
 
@@ -23,7 +25,8 @@ const Home = () => {
 
   
    const DownloadZip = () => {
-  
+
+    // it creates a link 
     const link = document.createElement('a');
     link.href = '/Preprocessed_Data_set.rar'; // relative to public folder
     link.download = 'Preprocessed_Data_set.rar';
@@ -149,18 +152,18 @@ const Home = () => {
           <h1>Research Team</h1>
           <div className="Team-container">
           <div className="Team-Members">
-             <img src="" alt="" className=""/>
-            <h3>Tayyiba Arshad</h3>
-            <h4> Research Supervisor</h4>
-            <p>Faculty advisor with expertise in computational oncology and systems biology.</p>
+             <img src={mam} alt="" className=""/>
+            <h3>Tayyaba Arshad</h3>
+            <h4>Research Supervisor</h4>
+            <p>Specialized in Natural Language processing & Medical Image processing.</p>
           
           </div>
 
            <div className="Team-Members">
-             <img src="" alt="" className=""/>
+             <img src={Abdullah} alt="" className=""/>
             <h3>Abdullah Saqib</h3>
-            <h4> Lead Researcher</h4>
-            <p>Specialized in bioinformatics and network analysis for cancer research applications.</p>
+            <h4>Lead Researcher</h4>
+            <p>Undergraduate Student in BS Computer Science</p>
           
           </div>
           
@@ -168,8 +171,8 @@ const Home = () => {
           <div className="Team-Members">
             <img src={haroon} alt="" className=""/>
             <h3>Haroon Siddique</h3>
-            <h4> Lead Researcher</h4>
-            <p>Specialized in bioinformatics and network analysis for cancer research applications.</p>
+            <h4>Lead Researcher</h4>
+            <p>Undergraduate Student in BS Computer Science</p>
           
           </div>
           </div>

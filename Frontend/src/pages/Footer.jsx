@@ -1,7 +1,13 @@
 import React from 'react';
 import '../styles/Footer.css'; // Import your CSS styles
+import { useNavigate } from "react-router-dom";
+
+
+
 
 const Footer = () => {
+  const navigate = useNavigate();
+
     
     const PrintPDF = () => {
    
@@ -38,7 +44,7 @@ const Footer = () => {
 
                 <div className="footer-section">
                     <h3 className="footer-heading">Quick Links</h3>
-                    <p className="footer-link" tabIndex={0}>Interactive Analysis</p>
+                    <p onClick={() => navigate('/Research_page')} className="footer-link" tabIndex={0}>Interactive Analysis</p>
                     <p onClick={PrintPDF}className="footer-link" tabIndex={0}>Research paper</p>
                 </div>
 
