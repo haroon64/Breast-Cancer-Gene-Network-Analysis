@@ -10,6 +10,8 @@ const Header = () => {
 
   const handleMouseEnter = (menu) => {
     if (hideTimeout.current) {
+      console.log(hideTimeout.current);
+      
       clearTimeout(hideTimeout.current);
       hideTimeout.current = null;
     }

@@ -1,6 +1,8 @@
 # models.py
 from pydantic import BaseModel
 from typing import List, Optional
+from typing import Union, Optional, Literal
+from pydantic import BaseModel, model_validator
 
 # Schema for network interactions
 class Interaction(BaseModel):
@@ -34,8 +36,7 @@ class ModifyEdgeRequest(BaseModel):
 class NetworkData(BaseModel):
     nodes: list  # List of nodes (example: [{'id': 1, 'name': 'Node 1'}, ...])
     edges: list  # List of edges (example: [{'source': 1, 'target': 2}, ...])
-from typing import Union, Optional, Literal
-from pydantic import BaseModel, model_validator
+
 
 
 class Weight(BaseModel):

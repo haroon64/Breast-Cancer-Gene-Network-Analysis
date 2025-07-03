@@ -20,13 +20,17 @@ def fetch_gene_network(selected_genes: list):
         "caller_identity": CALLER_IDENTITY
     }
     response = requests.get(STRING_API_URL, params=params)
+    print("response from string Api ",response)
+    print("json",response.json())
     return response.json() if response.status_code == 200 else []
 
 # Create network graph from fetched interactions
 def create_network_graph(interactions):
+    
     G = nx.Graph()
     for interaction in interactions:
         G.add_edge(interaction["preferredName_A"], interaction["preferredName_B"], weight=interaction["score"])
+     
     return G
 
 # Compute network metrics

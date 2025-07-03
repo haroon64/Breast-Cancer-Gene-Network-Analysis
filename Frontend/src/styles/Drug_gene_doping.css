@@ -588,12 +588,12 @@ canvas {
 
 .information-table th:nth-child(5),
 .information-table td:nth-child(5) {
-    width: 70%;
+    width: 65%;
 }
 
 .information-table th:nth-child(6),
 .information-table td:nth-child(6) {
-    width: 20%
+    width: 27%
 }
 
 /* === No Results Message === */

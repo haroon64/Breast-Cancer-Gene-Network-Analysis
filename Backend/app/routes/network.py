@@ -45,8 +45,7 @@ def sanitize_metrics(metrics):
 
 @router.get("/fetch-network1")
 async def fetch_network1():
-        print("hi")
-        print(1)
+      
         print("🚀 This is a fresh execution of fetch_network1()")
         sys.stdout.flush()  # Forces output to appear in terminal
 
@@ -54,7 +53,7 @@ async def fetch_network1():
         """Fetches gene interaction network and metrics using only the given array of genes."""
         global G
         logging.info("Step 1: Function fetch_network1() called")
-        print(2, flush=True)
+       
         selected_genes = [
              "GPD1" ,"EZH2","CDC20",
             "RBP4", "S100B", "S100P", "SFRP1",  "TOP2A", "ZBTB16", "ZWINT"
@@ -122,14 +121,17 @@ async def fetch_network():
 
     # Compute metrics
     metrics = calculate_metrics(G)
+
+    print("metrics:", metrics)
     safe_metrics = sanitize_metrics(metrics)
 
-    
+    print(safe_metrics)
 
     # ✅ Convert graph into frontend-friendly format
     nodes = [{"id": node, "label": node, "group": 1} for node in G.nodes()]
     edges = [{"from": edge[0], "to": edge[1], "weight": G.edges[edge]["weight"] } for edge in G.edges()]
     print(7)
+    #shows weight
     print(G.edges["LEP", "ADIPOQ"])
 
 
@@ -145,6 +147,7 @@ async def fetch_network():
 @router.post("/remove-gene")
 async def remove_gene_api(request: RemoveGeneRequest):
     print(1)
+    print(request)
     """Removes a gene from the network graph."""
     global G
     if not G:
@@ -158,6 +161,8 @@ async def remove_gene_api(request: RemoveGeneRequest):
 async def modify_edge_api(request: ModifyEdgeRequest):
     """Modifies the edge weight in the network graph."""
     global G
+
+    print(request)
     if not G:
         raise HTTPException(status_code=400, detail="No active network found")
     
@@ -216,7 +221,7 @@ async def apply_doxorubicin_api():
     print(edges)
     doxorubicin = DOXORUBICIN   
     return JSONResponse(content={
-        "message": "Paclitaxel effects applied",
+        "message": "Doxorubicin effects applied",
         "nodes": nodes,
         "edges": edges,
         "metrics": safe_metrics,
